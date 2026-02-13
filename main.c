@@ -12,5 +12,7 @@ int main() {
         u = &nums;
         *u = nums[0];
         printf("%p\n",u);
+
+        jfkjfklsf
     }
 }
