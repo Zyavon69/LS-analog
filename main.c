@@ -3,46 +3,19 @@
 #include <string.h>
 
 int main() {
-    char str[10] = "hello";
-    char *e = malloc(sizeof(str));
+    char str1[40] = "Hello, duo";
+    char str2[10] = " help";
 
-    for (int i = 0; i < 10; i++) {
-        printf("index: %d - elements: %d\n",i,e[i]);
-    }
+    unsigned long nullterm = strlen(str1);
 
-    strcpy(e, str);
-
-    printf("Инициализированная часть:\n");
-    for(int i = 0; i <= 5; i++) {
-        printf("str[%d] = %d ('%c')\n", i, str[i], 
-               str[i] >= 32 ? str[i] : '?');
-    }
-    
-    printf("\nМусор за пределами строки:\n");
-    for(int i = 6; i < 10; i++) {
-        printf("str[%d] = %d", i, str[i]);
-        if (str[i] >= 32 && str[i] <= 126) {
-            printf(" ('%c')", str[i]);
+    for (int i =0; i < 40; i ++) {
+        if (str1[i] == '\0') {
+            str1[i] = str2[0 + i - nullterm ];
         }
-        printf("\n");
     }
-    
-    free(e);
 
-    // Первый запуск
-    /*char *first = malloc(10);
-    for(int i = 0; i < 10; i++) {
-        printf("%d ", first[i]);
+    for (int i = 0; i < 40; i++) {
+        printf("%c",(int)str1[i]);
     }
-    printf("\n");
-    free(first);*/
-    
-    // Второй запуск - та же программа
-    char *second = malloc(10);
-    for(int i = 0; i < 10; i++) {
-        printf("%d ", second[i]);
-    }
-    printf("\n");
-    free(second);
-    return 0;
 }
+
