@@ -1,38 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "strcnpy-analog.h"
+char* ref_arr(char *str[10]);
 
 int main() {
-    // 1. Первый malloc — получим свежую память от ОС (скорее всего нули)
-    char *first = malloc(10);
-    printf("Первый malloc (свежая память):\n");
-    for(int i = 0; i < 10; i++) {
-        printf("first[%d] = %d\n", i, first[i]);
+    int *x[10];
+    int y[10] = {1,2,3,4,5,6,7,8,9,10};
+
+    for(int i = 0; i < 10; i ++) {
+        printf("y[%d] - %p\n", i, &y[i]);
     }
+
+    printf("\n");
     
-    // 2. Пишем туда какие-то данные
-    for(int i = 0; i < 10; i++) {
-        first[i] = i + 65;  // 'A', 'B', 'C'...
+    for (int i = 0; i < 10; i ++) {
+        *(x + i) = &y[i];
     }
-    printf("\nПосле записи:\n");
-    for(int i = 0; i < 10; i++) {
-        printf("first[%d] = %d ('%c')\n", i, first[i], first[i]);
+
+    for (int i = 0; i < 10; i++) {
+        printf("x[%d] - %p\n", i, x[i]);
     }
+    return 0; 
+}
+
+char* ref_arr(char *str[10]) {
+    char str1[100] = "hello пидорас у тебя мать проститутка";
+    char *ptr = &str1[0]; 
+    int a = my_strlen(ptr);
     
-    // 3. Освобождаем — теперь этот блок в списке свободных
-    free(first);
-    
-    // 4. Второй malloc — скорее всего получим ТОТ ЖЕ САМЫЙ блок
-    char *second = malloc(10);
-    printf("\nВторой malloc (повторное использование):\n");
-    for(int i = 0; i < 10; i++) {
-        printf("second[%d] = %d", i, second[i]);
-        if (second[i] >= 32 && second[i] <= 126) {
-            printf(" ('%c')", second[i]);
-        }
-        printf("\n");
+    for (int i = 0; i < a;i++) {
+        *(str + i) = &str1[i];
     }
-    
-    free(second);
-    return 0;
 }

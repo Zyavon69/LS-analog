@@ -1,8 +1,9 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "strcnpy-analog.h"
 
-int my_strlen(const char*);
+int my_strlen(char *ptr);
 int del_space(char *ptr);
 int* ptr_vis();
 
@@ -13,39 +14,18 @@ int main() {
 
     for (int i = 0; i < my_strlen(ptr); i ++) {
         if (str[i + 1] != ' ') {
-            char temp = str[i + 1];
+            char temp = str[i+1];
             str[i + 1] = str[i];
-            str[i] = temp;
+            str[i + 1 + 1] = temp;
         }
     }
 
     for (int i = 0; i < 20; i ++) {
         printf("%c ", str[i]);
     }
-
-    while(1) {
-        printf(" ");
-        int count =0;
-        int *ptr = &count;
-        
-        
-        while (*ptr <= 10000) {
-            *ptr = *ptr + 1;
-            printf("%d ", *ptr);
-        }
-        if (*ptr == 10000) {
-            break;
-        }
-    }
-    
-    printf("%d",*ptr_vis());
-
-    int* p = ptr_vis();
-
-    printf("%d",*p);
 }
 
-int my_strlen(const char *ptr) {
+int my_strlen(char *ptr) {
     int count = 0;
     for (int i = 0; i < i+1;i++) {
         if (*ptr == '\0') {

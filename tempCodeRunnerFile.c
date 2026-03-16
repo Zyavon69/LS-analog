@@ -1,0 +1,1 @@
+#include "strcnpy-analog.h"
