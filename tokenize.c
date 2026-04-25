@@ -1,8 +1,3 @@
-
-#include <stdio.h>
-#include <string.h>
-//void tokenize(struct Token_Array *array_tokens, char *pstr);
-
 enum Word_Types {
     Adj,Sub,Verb, Noun, NUL
 };
@@ -18,29 +13,7 @@ struct Token_Array {
 
 void tokenize(struct Token_Array *array_tokens, char *pstr);
 
-void del_space(char *str, char *buff, char *del); 
-
-
 int main() {
-    char str[22] = "Beautifull I take cat";
-    char *pstr = &str[0];
-    char buff[22];
-    char *pbuf = &buff[0];
-    char del[2] = " ";
-    char *pdel = &del[0];
-
-    del_space(pstr, buff, pdel);
-    struct Token_Array token_arr;
-
-    tokenize(&token_arr, pbuf);
-
-    for (int i = 0 ; i < 22; i ++) {
-        printf("%c",buff[i]);
-    }
-
-    printf("\n");
-
-    printf("%d", token_arr.arr[2].tokentypes);
 
 }
 
@@ -88,22 +61,4 @@ void tokenize(struct Token_Array *array_tokens, char *pstr) {
         k++;
         i++;
     }
-}
-
-void del_space(char *str, char *buff, char *del) {
-    int i = 0; int j = 0;
-    
-
-    while (str[i] != '\0') {
-        if (str[i] != del[0]) {
-            buff[j] = str[i];
-            j++;
-        } else {
-            buff[j] = '\0';
-            j++;   
-        }
-        i++;
-        
-    }
-
 }
