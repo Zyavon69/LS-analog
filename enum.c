@@ -1,4 +1,5 @@
 
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 //void tokenize(struct Token_Array *array_tokens, char *pstr);
@@ -24,24 +25,19 @@ void del_space(char *str, char *buff, char *del);
 int main() {
     char str[22] = "Beautifull I take cat";
     char *pstr = &str[0];
-    char buff[22];
-    char *pbuf = &buff[0];
-    char del[2] = " ";
-    char *pdel = &del[0];
-
-    del_space(pstr, buff, pdel);
     struct Token_Array token_arr;
 
-    tokenize(&token_arr, pbuf);
+    tokenize(&token_arr, pstr);
 
-    for (int i = 0 ; i < 22; i ++) {
-        printf("%c",buff[i]);
-    }
+    /*for (int i = 0 ; i < 22; i ++) {
+        printf("%c",pstr[i]);
+    }*/
 
     printf("\n");
 
-    printf("%d", token_arr.arr[2].tokentypes);
-
+    /*for (int i = 0; i < 10; i ++) {
+        printf("Enum - %d value - %s\n", token_arr.arr[i].tokentypes, token_arr.arr[i].value);
+    }*/
 }
 
 void tokenize(struct Token_Array *array_tokens, char *pstr) {
@@ -50,60 +46,19 @@ void tokenize(struct Token_Array *array_tokens, char *pstr) {
     enum Word_Types verb = Verb;
     enum Word_Types noun = Noun;
     enum Word_Types nul = NUL;
-    char temp_word[15];
-    static char *current_word;
-    int j = 0; int o = 0;
-    while (pstr[j] != '\0') {
-        temp_word[o] = pstr[j];
-        if (pstr[j] == '\0') {
-            temp_word[o] = '\0';
-            break;
-        }
-        j++;
-    }
 
-    if (pstr + 1 == NULL) {
-        current_word  = pstr;
-    }
-    
-    int i = 0; int k = 0;
-    
-    while(temp_word[i] != '\0') {
-        if (strcmp(pstr, "Beautifull") == 0 || strcmp(pstr, "Ugli") == 0 || strcmp(pstr, "Large") == 0) {
-            array_tokens->arr[k].tokentypes = adj;
-            array_tokens->arr[k].value = pstr;
-        } else if (strcmp(pstr, "river") == 0 || strcmp(pstr, "forest") == 0 || strcmp(pstr, "house") == 0) {
-            array_tokens->arr[k].tokentypes = sub;
-            array_tokens->arr[k].value = pstr;
-        } else if (strcmp(pstr, "take") == 0 || strcmp(pstr, "sit") == 0 || strcmp(pstr, "up") == 0) {
-            array_tokens->arr[k].tokentypes = verb;
-            array_tokens->arr[k].value = pstr;
-        } else if (strcmp(pstr, "I") == 0 || strcmp(pstr, "you") == 0 || strcmp(pstr, "cat") == 0) {
-            array_tokens->arr[k].tokentypes = noun;
-            array_tokens->arr[k].value = pstr;
-        } else  {
-            array_tokens->arr[k].tokentypes = nul;
-            array_tokens->arr[k].value = pstr;
-        }
-        k++;
-        i++;
-    }
-}
+    char buffer[15];
+    char *read = pstr;
+    char *write = &buffer[0];
 
-void del_space(char *str, char *buff, char *del) {
-    int i = 0; int j = 0;
-    
+    int k = 0;
+    while (*read != ' ') {
+            *write = *read;
+            write++;
+            read ++;
+    }    
 
-    while (str[i] != '\0') {
-        if (str[i] != del[0]) {
-            buff[j] = str[i];
-            j++;
-        } else {
-            buff[j] = '\0';
-            j++;   
-        }
-        i++;
-        
+    for (int i = 0; i < 15; i ++) {
+        printf("%d", buffer[i]);
     }
-
 }
